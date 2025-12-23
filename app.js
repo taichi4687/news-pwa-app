@@ -37,21 +37,38 @@ class NewsApp {
         container.innerHTML = '';
 
         try {
-            const sectionMap = {
-                'general': 'world',
-                'business': 'business',
-                'technology': 'technology',
-                'sports': 'sport',
-                'entertainment': 'culture',
-                'health': 'society',
-                'science': 'science'
-            };
-
-            const section = sectionMap[this.currentCategory] || 'world';
+            let url;
             
-            const response = await fetch(
-                `${this.baseUrl}/search?section=${section}&show-fields=thumbnail,trailText&page-size=20&api-key=${this.apiKey}`
-            );
+            // カスタムカテゴリの処理
+            if (this.currentCategory === 'construction-dx') {
+                // 建設DXに関連するキーワードで検索
+                const keywords = 'construction digital transformation OR construction technology OR smart construction OR BIM OR IoT construction';
+                url = `${this.baseUrl}/search?q=${encodeURIComponent(keywords)}&show-fields=thumbnail,trailText&page-size=20&api-key=${this.apiKey}`;
+            } else if (this.currentCategory === 'ai-ml') {
+                // AI・機械学習関連
+                const keywords = 'artificial intelligence OR machine learning OR deep learning OR neural networks OR AI technology';
+                url = `${this.baseUrl}/search?q=${encodeURIComponent(keywords)}&show-fields=thumbnail,trailText&page-size=20&api-key=${this.apiKey}`;
+            } else if (this.currentCategory === 'climate') {
+                // 気候変動関連
+                const keywords = 'climate change OR global warming OR renewable energy OR sustainability OR carbon emissions';
+                url = `${this.baseUrl}/search?q=${encodeURIComponent(keywords)}&show-fields=thumbnail,trailText&page-size=20&api-key=${this.apiKey}`;
+            } else {
+                // 通常のセクション検索
+                const sectionMap = {
+                    'general': 'world',
+                    'business': 'business',
+                    'technology': 'technology',
+                    'sports': 'sport',
+                    'entertainment': 'culture',
+                    'health': 'society',
+                    'science': 'science'
+                };
+
+                const section = sectionMap[this.currentCategory] || 'world';
+                url = `${this.baseUrl}/search?section=${section}&show-fields=thumbnail,trailText&page-size=20&api-key=${this.apiKey}`;
+            }
+            
+            const response = await fetch(url);
 
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
