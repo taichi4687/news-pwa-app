@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ニュースアプリ</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="styles.css">
+    <meta name="theme-color" content="#2196F3">
+    <link rel="apple-touch-icon" href="icons/icon-192x192.png">
+</head>
+<body>
+    <div id="app">
+        <header>
+            <h1>📰 ニュースアプリ</h1>
+            <div class="category-selector">
+                <select id="categorySelect">
+                    <option value="general">世界</option>
+                    <option value="business">ビジネス</option>
+                    <option value="technology">テクノロジー</option>
+                    <option value="sports">スポーツ</option>
+                    <option value="entertainment">カルチャー</option>
+                    <option value="health">社会</option>
+                    <option value="science">科学</option>
+                </select>
+                <button id="refreshBtn">🔄</button>
+            </div>
+        </header>
+
+        <main>
+            <div id="loading" class="loading hidden">読み込み中...</div>
+            <div id="error" class="error hidden"></div>
+            <div id="newsContainer" class="news-container"></div>
+        </main>
+    </div>
+
+    <script src="app.js"></script>
+    <script>
+        // Service Worker登録
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js');
+        }
+    </script>
+</body>
+</html>

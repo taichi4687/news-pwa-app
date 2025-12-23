@@ -1,0 +1,16 @@
+{
+  "name": "news-pwa",
+  "version": "1.0.0",
+  "description": "カテゴリ別ニュースPWAアプリ",
+  "main": "index.js",
+  "scripts": {
+    "start": "npx http-server . -p 3000",
+    "build": "echo 'Build complete'"
+  },
+  "keywords": ["pwa", "news", "mobile"],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  }
+}
